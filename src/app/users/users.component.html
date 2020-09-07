@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Users</h1>
+  <table>
+    <tr>
+      <th>User Id</th>
+      <th>Name</th>
+      <th>E-mail</th>
+      <th>Company name</th>
+    </tr>
+    <tr *ngFor="let one of users">
+      <td>{{one.id}}</td>
+      <td>
+        <a href="" routerLink="/user"
+           [queryParams]="{user_id: one.id}">
+          <span *ngIf="one.name">{{one.name}} </span>
+          <span *ngIf="one.username">{{one.username}}</span>
+        </a>
+      </td>
+      <td>
+        <a href="mailto: {{one.email}}">
+          <span>{{one.email}}</span>
+        </a>
+      </td>
+      <td>{{one.company.name}}</td>
+    </tr>
+  </table>
+</div>
+

@@ -1,0 +1,52 @@
+<div class="container">
+  <h1>Add a New post</h1>
+  <form [formGroup]="newPostFormGroup">
+    <div class="one-input">
+      <h2 class="header">Post title</h2>
+      <input type="text" formControlName="title">
+      <p class="error" *ngIf="titleNull">Write the title, please</p>
+      <p class="error" *ngIf="invalidTitle">Invalid title</p>
+    </div>
+    <div class="one-input">
+      <h2 class="header">Post body</h2>
+      <textarea type="text" formControlName="body"></textarea>
+      <p class="error" *ngIf="bodyNull">Write the body, please</p>
+    </div>
+  </form>
+  <button class="pointer" (click)="create()">
+    <span *ngIf="!load">Publish</span>
+    <svg *ngIf="load" width="37" height="11" viewBox="0 0 45 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="5.5" cy="5.5" r="5.5" fill="#fff">
+        <animate
+          attributeName="opacity"
+          dur="1s"
+          values="0;1;0"
+          repeatCount="indefinite"
+          begin="0.1"/>
+      </circle>
+      <circle cx="22.5" cy="5.5" r="5.5" fill="#fff">
+        <animate
+          attributeName="opacity"
+          dur="1s"
+          values="0;1;0"
+          repeatCount="indefinite"
+          begin="0.2"/>
+      </circle>
+      <circle cx="39.5" cy="5.5" r="5.5" fill="#fff">
+        <animate
+          attributeName="opacity"
+          dur="1s"
+          values="0;1;0"
+          repeatCount="indefinite"
+          begin="0.3"/>
+      </circle>
+    </svg>
+  </button>
+  <div class="popup" *ngIf="openPopUp">
+    <div class="popup-content">
+      <h3>Success!</h3>
+      <p>Post is created</p>
+      <button class="pointer" (click)="openPopUp=!openPopUp">ok</button>
+    </div>
+  </div>
+</div>

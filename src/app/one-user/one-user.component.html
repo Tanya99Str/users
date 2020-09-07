@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="details">
+    <h2>User details</h2>
+    <div class="user-information">
+      <ul>
+        <li>
+          <h3>User name:
+            <span *ngIf="oneUser?.name">{{oneUser?.name}} </span>
+            <span *ngIf="oneUser?.username">{{oneUser?.username}}</span>
+          </h3>
+        </li>
+        <li>
+          <h3>Email:
+            <a href="mailto:{{oneUser?.email}}" *ngIf="oneUser?.email">{{oneUser?.email}}</a>
+            <span *ngIf="!oneUser?.email">Не вказано</span>
+          </h3>
+        </li>
+        <li>
+          <h3>Adress:
+            <span *ngIf="oneUser&&oneUser?.address&&oneUser?.address?.street">{{oneUser?.address?.street}}, </span>
+            <span *ngIf="oneUser&&oneUser?.address&&oneUser?.address?.suite">{{oneUser?.address?.suite}}, </span>
+            <span *ngIf="oneUser&&oneUser?.address&&oneUser?.address?.zipcode">{{oneUser?.address?.zipcode}}, </span>
+            <span *ngIf="oneUser&&oneUser?.address&&oneUser?.address?.city">{{oneUser?.address?.city}}</span></h3>
+        </li>
+        <li>
+          <h3>Phone number:
+            <a href="tel:{{oneUser?.phone}}" *ngIf="oneUser?.phone">{{oneUser?.phone}}</a>
+            <span *ngIf="!oneUser?.phone">Не вказано</span>
+          </h3>
+        </li>
+        <li>
+          <h3>Company name:
+            <a href="http://www.{{oneUser?.website}}" target="_blank">{{oneUser?.company?.name}}</a></h3>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="posts">
+    <h2>User posts</h2>
+    <button class="pointer btn-add-post" routerLink="/new-post" [queryParams]="{user_id: oneUser?.id}">Add post</button>
+    <table>
+      <tr>
+        <th>Post ID</th>
+        <th>Post title</th>
+        <th>Number of comments</th>
+        <th>Short description</th>
+      </tr>
+      <tr *ngFor="let one of posts">
+        <td>{{one.id}}</td>
+        <td>{{one.title}}</td>
+        <td>
+          <app-comments [postId]="one.id"></app-comments>
+        </td>
+        <td>{{changeLimit(one.body, limit)}}
+          <span *ngIf="one.body>changeLimit(one.body, limit)">...</span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
